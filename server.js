@@ -1,18 +1,21 @@
-// Importa el módulo 'express', que es un framework de Node.js
 const express = require('express');
+const conectarDB = require('./config/db');
 
+// Conectar a la base de datos
+conectarDB();
 
-// Crea una instancia de la aplicación Express
+// Crear una instancia de Express
 const app = express();
 
-// Define una ruta de prueba para la URL raíz ('/')
+// Middleware para analizar el cuerpo de las solicitudes
+app.use(express.json());
+
+// Definir una ruta de prueba
 app.get('/', (req, res) => {
-  // Envía una respuesta con el mensaje 'Hola mundo: ADSO 2024' cuando se accede a la URL raíz
   res.send('Hola mundo: ADSO 2024');
 });
-
-// configura el puerto en el que escuhara el servidor
+// Configurar el puerto en el que escuchará el servidor
 const PORT = 5000;
 app.listen(PORT, () => {
-    	console.log('servidor corriendo en el puerto ${PORT}');
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
